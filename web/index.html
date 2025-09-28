@@ -27,7 +27,7 @@
       const container = document.getElementById('list');
       try {
         // Load JSON file (must be served via local server, not direct file://)
-        const res = await fetch('../data/reddit_images.json'); // serve with http server
+        const res = await fetch('../data/reddit_img.json'); // serve with http server
         const data = await res.json();  // Parse JSON into JS objects
         // Loop through each item in the JSON
         data.forEach(item => {
