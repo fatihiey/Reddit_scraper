@@ -15,12 +15,15 @@ Results are saved into a JSON file (`reddit_img.json`) and can  be displayed in 
 
 ## Installation
 ```bash
-git clone https://github.com/your username/Reddit_scraper.git
+git clone https://github.com/<your-username>/Reddit_scraper.git
 cd Reddit_scraper
 python3 -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-.venv\Scripts\activate     # Windows
-pip install requests
+source .venv/bin/activate   # Linux/Mac
+.venv\Scripts\activate      # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
 ```
 ## Usage (in venv)
 python scraper/reddit.py --subreddit malaysia --pages 10 --out data/reddit_img.json
