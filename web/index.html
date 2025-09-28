@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Reddit Image List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+     /* Page styling */
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 24px auto; padding: 0 16px; }
+     /* Each Reddit post */
+    .card { margin: 16px 0; border: 1px solid #ddd; border-radius: 12px; padding: 12px; }
+     /* images */
+    img { max-width: 100%; height: auto; display: block; margin-top: 8px; }
+    h2 { font-size: 18px; margin: 0; }
+  </style>
+</head>
+<body>
+    <!-- Main page title -->
+  <h1>Reddit Posts With Images</h1>
+   <!-- Container where posts will be injected -->
+  <div id="list"></div> 
+  
+
+  <script>
+    // Main function runs automatically
+    async function main() {
+      const container = document.getElementById('list');
+      try {
+        // Load JSON file (must be served via local server, not direct file://)
+        const res = await fetch('../data/reddit_images.json'); // serve with http server
+        const data = await res.json();  // Parse JSON into JS objects
+        // Loop through each item in the JSON
+        data.forEach(item => {
+          // Create a new card for each Reddit post
+          const div = document.createElement('div');
+          div.className = 'card';
+          // Insert post title and image into the card
+          div.innerHTML = `
+            <h2>${item.post_title.replace(/</g,'&lt;')}</h2>
+            <img loading="lazy" src="${item.image_url}" alt="Post image" />
+          `;
+          // Add the card into the page
+          container.appendChild(div);
+        });
+        // shows an error message, if Json files fails to load
+      } catch (e) {
+        container.textContent = 'Failed to load JSON. Did you start the local server?';
+      }
+    }
+    // Run the main function
+    main();
+  </script>
+</body>
+</html>
+ 
